@@ -6,13 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Play.Catalog.Service.Dtos;
 using Play.Catalog.Service.Entities;
 using Play.Catalog.Service.Repositoies;
+using Play.Common;
 
 namespace Play.Catalog.Service.Controllers
 {
     // https://localhost:5001/items
     [ApiController]
     [Route("items")]
-    public class ItemController : ControllerBase
+    public class ItemsController : ControllerBase
     {
         private readonly IRepository<Item> _itemsRepository;
 

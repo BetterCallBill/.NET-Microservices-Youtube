@@ -4,11 +4,11 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
-using Play.Catalog.Service.Entities;
-using Play.Catalog.Service.Repositoies;
+using Play.Common.Entities;
+using Play.Common.Repositoies;
 using Play.Common.Settings;
 
-namespace Play.Catalog.Service.Repositories
+namespace Play.Common.MongoDB
 {
     public static class Extensions
     {
@@ -20,7 +20,6 @@ namespace Play.Catalog.Service.Repositories
             services.AddSingleton(serviceProvider =>
             {
                 var configuration = serviceProvider.GetService<IConfiguration>();
-                // Load service settings
                 var serviceSettings = configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
                 var mongoDbSettings = configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
                 var mongoClient = new MongoClient(mongoDbSettings.ConnectionString);
@@ -29,9 +28,8 @@ namespace Play.Catalog.Service.Repositories
 
             return services;
         }
-        
-        // Register repository
-         public static IServiceCollection AddMongoRepository<T>(this IServiceCollection services, string collectionName)
+
+        public static IServiceCollection AddMongoRepository<T>(this IServiceCollection services, string collectionName)
             where T : IEntity
         {
             services.AddSingleton<IRepository<T>>(serviceProvider =>
