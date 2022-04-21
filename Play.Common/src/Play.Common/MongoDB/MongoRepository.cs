@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using MongoDB.Driver;
-using Play.Common.Entities;
-using Play.Common.Repositoies;
 
 namespace Play.Common.MongoDB
 {
@@ -66,9 +64,5 @@ namespace Play.Common.MongoDB
             FilterDefinition<T> filter = filterBuilder.Eq(entity => entity.Id, id);
             await dbCollection.DeleteOneAsync(filter);
         }
-
-
-
-
     }
 }

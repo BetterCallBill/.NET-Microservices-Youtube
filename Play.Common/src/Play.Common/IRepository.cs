@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Play.Common.Entities;
 
-namespace Play.Common.Repositoies
+namespace Play.Common
 {
     public interface IRepository<T> where T : IEntity
     {
