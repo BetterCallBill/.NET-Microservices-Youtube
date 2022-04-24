@@ -7,6 +7,8 @@ using Microsoft.OpenApi.Models;
 using Play.Catalog.Service.Entities;
 using Play.Common.MongoDB;
 using Play.Common.Settings;
+using MassTransit;
+using Play.Catalog.Service.Settings;
 
 namespace Play.Catalog.Service
 {
@@ -25,9 +27,10 @@ namespace Play.Catalog.Service
         public void ConfigureServices(IServiceCollection services)
         {
             var serviceSettings = Configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
-            
+
             services.AddMongo()
-                    .AddMongoRepository<Item>("items");
+                    .AddMongoRepository<Item>("items")
+                    .AddMassTransitWithRabbitMq();
 
             // Don't remove Async suffix
             services.AddControllers(options =>
